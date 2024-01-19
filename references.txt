@@ -1,0 +1,9 @@
+PRIMARY:
+https://docs.render.com/deploy-bun-docker
+https://dev.to/code42cate/how-to-dockerize-a-bun-app-38e4
+
+
+SECONDARY:
+https://dev.to/code42cate/deploying-bun-apps-on-hetzner-33kb
+https://www.koyeb.com/docs/deploy/bun
+https://railway.app/template/F0K-j3
