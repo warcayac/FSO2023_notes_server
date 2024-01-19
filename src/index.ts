@@ -3,6 +3,7 @@ import cors from "@elysiajs/cors";
 
 import { contentType } from "./utils/constants";
 import wlogger from "./plugins/wac-logger";
+import staticPlugin from "@elysiajs/static";
 
 
 let notes = [
@@ -47,6 +48,10 @@ function generateNewId() {
 const app = new Elysia()
   .use(cors({methods: '*'}))
   .use(wlogger(true))
+  .use(staticPlugin({
+    assets: 'dist',
+    prefix: '/'
+  }))
   .group(
     '/api/notes',
     (router) => router
@@ -82,7 +87,7 @@ const app = new Elysia()
         },
         paramIdParser,
       )
-      .post(
+      .post(  // create new note
         '/',
         async (req) => {
           const newNote = {...req.body, id: generateNewId()};
@@ -98,7 +103,7 @@ const app = new Elysia()
           error: (details) => JSON.parse(details.error.message)['message']
         }
       )
-      .put(
+      .put( // change content of an existing note
         '/:id',
         req => {
           const id = req.body.id;
@@ -120,10 +125,7 @@ const app = new Elysia()
         },
       )
   )
-  .get(
-    '/', 
-    () => new Response('<h1>Hello World!</h1', { headers: contentType.HTML }),
-  )
+  .all('*', () => Response.json({message: 'Path name not found'}, {status: 404}))
   .listen(3001)
 ;
 

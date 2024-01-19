@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@elysiajs/cors": "^0.8.0",
+    "@elysiajs/static": "^0.8.1",
     "ansis": "^2.0.3",
     "elysia": "latest"
   },
